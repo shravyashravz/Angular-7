@@ -1,0 +1,31 @@
+<mat-card class="filter-card">
+  <mat-card-header>
+    <mat-card-title>
+      <h4>Filter</h4>
+    </mat-card-title>
+  </mat-card-header>
+  <label class="mr-1 font-weight-bold">Type:</label>
+  <mat-radio-group [(ngModel)]="selectedType">
+    <mat-radio-button class="mx-2" value="all">All</mat-radio-button>
+    <mat-radio-button *ngFor="let type of types" class="mx-2" [value]="type">{{type}}</mat-radio-button>
+  </mat-radio-group>
+</mat-card>
+<mat-divider class="my-3"></mat-divider>
+<div @list class="row mb-5" *ngIf="examples">
+  <div @items class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let item of examples">
+    <mat-card>
+      <mat-card-header>
+        <div mat-card-avatar>
+          <ng-container [ngSwitch]="item.type">
+            <i class="fas fa-laptop-code fa-2x" *ngSwitchCase="'FrontEnd'"></i>
+            <i class="fas fa-database fa-2x" *ngSwitchCase="'Database'"></i>
+            <i class="fas fa-code fa-2x" *ngSwitchCase="'Languages'"></i>
+            <i class="fas fa-question fa-2x" *ngSwitchDefault></i>
+          </ng-container>
+        </div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="item.preview + '?text=' + item.name" [alt]="item.name">   
+    </mat-card>
+  </div>
+</div>
